@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  BeginRunVC.swift
 //  TriniRun
 //
 //  Created by Joseph on 12/22/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class BeginRunVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
