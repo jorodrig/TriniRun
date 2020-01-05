@@ -70,10 +70,8 @@
 				7C66F6FF23B01723005DEB8E /* Utilities */,
 				7C66F70023B0172E005DEB8E /* Extensions */,
 				7C66F70123B01739005DEB8E /* Resources */,
-				7C66F6E623B00D72005DEB8E /* AppDelegate.swift */,
 				7C66F6E823B00D72005DEB8E /* SceneDelegate.swift */,
-				7C66F6EA23B00D72005DEB8E /* BeginRunVC.swift */,
-				7C66F6EC23B00D72005DEB8E /* RunLogVC.swift */,
+				7C66F6E623B00D72005DEB8E /* AppDelegate.swift */,
 				7C66F6EE23B00D72005DEB8E /* Main.storyboard */,
 				7C66F6F123B00D75005DEB8E /* Assets.xcassets */,
 				7C66F6F323B00D75005DEB8E /* LaunchScreen.storyboard */,
@@ -99,6 +97,8 @@
 		7C66F6FE23B01718005DEB8E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7C66F6EC23B00D72005DEB8E /* RunLogVC.swift */,
+				7C66F6EA23B00D72005DEB8E /* BeginRunVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
