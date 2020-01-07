@@ -198,12 +198,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749.27536231884062" y="359.51086956521743"/>
+            <point key="canvasLocation" x="748" y="360"/>
         </scene>
-        <!--View Controller-->
+        <!--CurrentRunVC-->
         <scene sceneID="qLB-de-1dw">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="9UZ-nz-cIY" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="9UZ-nz-cIY" userLabel="CurrentRunVC" customClass="CurrentRunVC" customModule="TriniRun" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZVz-gv-ixO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
