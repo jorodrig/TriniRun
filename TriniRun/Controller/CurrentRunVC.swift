@@ -45,6 +45,10 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
                     sliderView.center.x = swipeBGImageView.center.x - minAdjust
                 }
                 sender.setTranslation(CGPoint.zero, in: self.view)
+            }else if sender.state == UIGestureRecognizer.State.ended{
+                UIView.animate(withDuration: 0.1, animations:{
+                sliderView.center.x = self.swipeBGImageView.center.x - minAdjust
+                })
             }
         }
         
