@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from UIViewController
 
@@ -23,6 +24,22 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
         sliderImageView.isUserInteractionEnabled = true  //allow user interaction
         swipeGesture.delegate = self as? UIGestureRecognizerDelegate //must have
         
+    }
+    
+    /* Helps the reload the view after initial Appear when going back and forth ViewControllers etc*/
+    override func viewWillAppear(_ animated: Bool) {
+        manager?.delegate = self
+        manager?.distanceFilter = 10 //Meters
+        startRun()
+        }
+    
+    func startRun(){
+        manager?.startUpdatingLocation()
+    }
+    
+    
+    func endRun(){
+        manager?.stopUpdatingLocation()
     }
     
 /* endRunSwiped is used to end the run action - user will swipe or slide left to right to end or use pause button*/
@@ -54,4 +71,15 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
         
     }
 
+}
+
+/*Used to Track the device for location - to see if we are still authorized to track our location
+ if not will call checkLocationAuthStatus in LocationVC */
+extension CurrentRunVC: CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse{
+            checkLocationAuthStatus()
+        }
+    }
+    
 }
