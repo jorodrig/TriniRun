@@ -31,7 +31,7 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
          not the main view controller.*/
         let minAdjust: CGFloat = 80
         let maxAdjust: CGFloat = 128
-        if let sliderView = sender.view{
+        if let sliderView = sender.view{  //below starts the completion handler for the slider swipe button
             if sender.state == UIGestureRecognizer.State.began || sender.state == UIGestureRecognizer.State.changed{
                 let translation = sender.translation(in: self.view)
                 if sliderView.center.x >= (swipeBGImageView.center.x - minAdjust) && sliderView.center.x <= (swipeBGImageView.center.x + maxAdjust){
@@ -45,9 +45,9 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
                     sliderView.center.x = swipeBGImageView.center.x - minAdjust
                 }
                 sender.setTranslation(CGPoint.zero, in: self.view)
-            }else if sender.state == UIGestureRecognizer.State.ended{
+            }else if sender.state == UIGestureRecognizer.State.ended{           //End by swiping to the right and return to previous screen - the caller
                 UIView.animate(withDuration: 0.1, animations:{
-                sliderView.center.x = self.swipeBGImageView.center.x - minAdjust
+                sliderView.center.x = self.swipeBGImageView.center.x - minAdjust  //need 'self' here as we are in a completion handler
                 })
             }
         }
