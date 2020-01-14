@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C09192123CDD84B0019938A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C09192023CDD84B0019938A /* Extensions.swift */; };
 		7C21247223C4AA20005766ED /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21247123C4AA20005766ED /* LocationVC.swift */; };
 		7C66F6E723B00D72005DEB8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66F6E623B00D72005DEB8E /* AppDelegate.swift */; };
 		7C66F6E923B00D72005DEB8E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66F6E823B00D72005DEB8E /* SceneDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C09192023CDD84B0019938A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		7C21247123C4AA20005766ED /* LocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
 		7C66F6E323B00D72005DEB8E /* TriniRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TriniRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C66F6E623B00D72005DEB8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 		7C66F70023B0172E005DEB8E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7C09192023CDD84B0019938A /* Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				7C66F6E923B00D72005DEB8E /* SceneDelegate.swift in Sources */,
 				7C68407323C5DF7100E046B0 /* CurrentRunVC.swift in Sources */,
 				7C21247223C4AA20005766ED /* LocationVC.swift in Sources */,
+				7C09192123CDD84B0019938A /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

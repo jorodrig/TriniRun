@@ -101,7 +101,7 @@ extension CurrentRunVC: CLLocationManagerDelegate{
             startLocation = locations.first                                    //assign the first loaction when motion detected
         }else if let location = locations.last{                                //the last location detected in CLLocation
             runDistance += lastLocation.distance(from: location)               //is the last location in the CLLocaiton array
-            distanceLbl.text = "\(runDistance)"                                //update the Distance label
+            distanceLbl.text = "\(runDistance.metersToMiles(places: 2))"                                //update the Distance label
         }
         lastLocation = locations.last
     }
