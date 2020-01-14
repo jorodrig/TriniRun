@@ -21,7 +21,11 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
     
     var startLocation: CLLocation!              //must be forced unwrap as should not be nil once started
     var lastLocation: CLLocation!               //ditto
-    var runDistance = 0.0                      //ditto
+    var runDistance = 0.0                       //ditto
+    var counter = 0                             // used in Timer function - represents seconds
+    var timer = Timer()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,12 +46,24 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
     
     func startRun(){
         manager?.startUpdatingLocation()
+        startTimer()
     }
         
     func endRun(){
         manager?.stopUpdatingLocation()
     }
 
+    func startTimer(){
+        durationLbl.text = counter.formatTimeDurationToString()               //called once per run - set it to zero as default for each run
+        
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateCounter(){
+        counter += 1
+        durationLbl.text = counter.formatTimeDurationToString()
+    }
+    
     @IBAction func pauseBtnPressed(_ sender: Any) {
         
         
@@ -81,9 +97,7 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
                 })
             }
         }
-        
     }
-
 }
 
 /*Used to Track the device for location - to see if we are still authorized to track our location
