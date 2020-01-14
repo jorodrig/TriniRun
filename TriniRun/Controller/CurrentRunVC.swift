@@ -12,9 +12,16 @@ import MapKit
 class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from UIViewController
 
     @IBOutlet weak var swipeBGImageView: UIImageView!
-    
     @IBOutlet weak var sliderImageView: UIImageView!
+    @IBOutlet weak var durationLbl: UILabel!
+    @IBOutlet weak var paceLbl: UILabel!
+    @IBOutlet weak var distanceLbl: UILabel!
+    @IBOutlet weak var pauseBtn: UIButton!
     
+    
+    var startLocation: CLLocation!              //must be forced unwrap as should not be nil once started
+    var lastLocation: CLLocation!               //ditto
+    var runDistance = 0.0                      //ditto
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,11 +43,17 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
     func startRun(){
         manager?.startUpdatingLocation()
     }
-    
-    
+        
     func endRun(){
         manager?.stopUpdatingLocation()
     }
+
+    @IBAction func pauseBtnPressed(_ sender: Any) {
+        
+        
+    }
+    
+    
     
 /* endRunSwiped is used to end the run action - user will swipe or slide left to right to end or use pause button*/
     @objc func endRunSwiped(sender: UIPanGestureRecognizer){
@@ -82,4 +95,14 @@ extension CurrentRunVC: CLLocationManagerDelegate{
         }
     }
     
+    /* Location manager is used to keep track of location*/
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if startLocation == nil {                                              //is True when apps starts
+            startLocation = locations.first                                    //assign the first loaction when motion detected
+        }else if let location = locations.last{                                //the last location detected in CLLocation
+            runDistance += lastLocation.distance(from: location)               //is the last location in the CLLocaiton array
+            distanceLbl.text = "\(runDistance)"                                //update the Distance label
+        }
+        lastLocation = locations.last
+    }
 }
