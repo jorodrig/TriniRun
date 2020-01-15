@@ -24,7 +24,7 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
     var runDistance = 0.0                       //ditto
     var counter = 0                             // used in Timer function - represents seconds
     var timer = Timer()
-    
+    var pace = 0                                //Used in pace function seconds/miles
     
     
     override func viewDidLoad() {
@@ -63,6 +63,15 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
         counter += 1
         durationLbl.text = counter.formatTimeDurationToString()
     }
+    
+    
+    func calculatePace(time seconds: Int, miles: Double) -> String{
+        pace = Int(Double(seconds) / miles)
+        return pace.formatTimeDurationToString()
+    }
+    
+    
+    
     
     @IBAction func pauseBtnPressed(_ sender: Any) {
         
@@ -115,7 +124,10 @@ extension CurrentRunVC: CLLocationManagerDelegate{
             startLocation = locations.first                                    //assign the first loaction when motion detected
         }else if let location = locations.last{                                //the last location detected in CLLocation
             runDistance += lastLocation.distance(from: location)               //is the last location in the CLLocaiton array
-            distanceLbl.text = "\(runDistance.metersToMiles(places: 2))"                                //update the Distance label
+            distanceLbl.text = "\(runDistance.metersToMiles(places: 2))"       //update the Distance label
+            if counter > 0 && runDistance > 0 {
+                paceLbl.text = calculatePace(time: counter, miles: runDistance.metersToMiles(places: 2))
+            }
         }
         lastLocation = locations.last
     }
