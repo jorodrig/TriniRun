@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F5D2397B44CD61D2715EDBB /* Pods_TriniRun.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8256E2A6720E15E7E6C105A0 /* Pods_TriniRun.framework */; };
+		7C033CD423D326DE0037388D /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C033CD323D326DE0037388D /* Run.swift */; };
 		7C09192123CDD84B0019938A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C09192023CDD84B0019938A /* Extensions.swift */; };
 		7C21247223C4AA20005766ED /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21247123C4AA20005766ED /* LocationVC.swift */; };
 		7C66F6E723B00D72005DEB8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66F6E623B00D72005DEB8E /* AppDelegate.swift */; };
@@ -23,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C033CD323D326DE0037388D /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		7C09192023CDD84B0019938A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		7C21247123C4AA20005766ED /* LocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
 		7C66F6E323B00D72005DEB8E /* TriniRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TriniRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,6 +41,9 @@
 		7CFEC0C923B28EFE00B9161A /* On Run VC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "On Run VC.png"; sourceTree = "<group>"; };
 		7CFEC0CA23B28EFE00B9161A /* Log TableView VC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Log TableView VC.png"; sourceTree = "<group>"; };
 		7CFEC0CB23B28EFF00B9161A /* Run Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Run Home.png"; sourceTree = "<group>"; };
+		8256E2A6720E15E7E6C105A0 /* Pods_TriniRun.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TriniRun.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC204BCA30A31264AE792D93 /* Pods-TriniRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TriniRun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TriniRun/Pods-TriniRun.debug.xcconfig"; sourceTree = "<group>"; };
+		F358357F3FC55A203820A81A /* Pods-TriniRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TriniRun.release.xcconfig"; path = "Pods/Target Support Files/Pods-TriniRun/Pods-TriniRun.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,17 +51,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F5D2397B44CD61D2715EDBB /* Pods_TriniRun.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1EE89D5A12619AF97C96CBE8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BC204BCA30A31264AE792D93 /* Pods-TriniRun.debug.xcconfig */,
+				F358357F3FC55A203820A81A /* Pods-TriniRun.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7C66F6DA23B00D72005DEB8E = {
 			isa = PBXGroup;
 			children = (
 				7C66F6E523B00D72005DEB8E /* TriniRun */,
 				7C66F6E423B00D72005DEB8E /* Products */,
+				1EE89D5A12619AF97C96CBE8 /* Pods */,
+				D6B7638D462CB1297F3E8EAA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,6 +107,7 @@
 		7C66F6FC23B01701005DEB8E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7C033CD323D326DE0037388D /* Run.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -136,6 +155,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		D6B7638D462CB1297F3E8EAA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8256E2A6720E15E7E6C105A0 /* Pods_TriniRun.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,9 +170,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C66F6F923B00D75005DEB8E /* Build configuration list for PBXNativeTarget "TriniRun" */;
 			buildPhases = (
+				5016A66220C8D9AE2609A5CA /* [CP] Check Pods Manifest.lock */,
 				7C66F6DF23B00D72005DEB8E /* Sources */,
 				7C66F6E023B00D72005DEB8E /* Frameworks */,
 				7C66F6E123B00D72005DEB8E /* Resources */,
+				1B55178F68C7CA7C84F71CDE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -205,12 +234,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1B55178F68C7CA7C84F71CDE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TriniRun/Pods-TriniRun-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TriniRun/Pods-TriniRun-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5016A66220C8D9AE2609A5CA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TriniRun-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7C66F6DF23B00D72005DEB8E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7C66F6ED23B00D72005DEB8E /* RunLogVC.swift in Sources */,
+				7C033CD423D326DE0037388D /* Run.swift in Sources */,
 				7C66F6EB23B00D72005DEB8E /* BeginRunVC.swift in Sources */,
 				7C66F6E723B00D72005DEB8E /* AppDelegate.swift in Sources */,
 				7C66F6E923B00D72005DEB8E /* SceneDelegate.swift in Sources */,
@@ -358,6 +437,7 @@
 		};
 		7C66F6FA23B00D75005DEB8E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC204BCA30A31264AE792D93 /* Pods-TriniRun.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -376,6 +456,7 @@
 		};
 		7C66F6FB23B00D75005DEB8E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F358357F3FC55A203820A81A /* Pods-TriniRun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

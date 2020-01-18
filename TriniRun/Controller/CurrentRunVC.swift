@@ -79,10 +79,8 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
         pace = Int(Double(seconds) / miles)
         return pace.formatTimeDurationToString()
     }
-    
-    
-    
-    
+        
+        
     @IBAction func pauseBtnPressed(_ sender: Any) {
         if timer.isValid{
             pauseRun()
@@ -92,8 +90,7 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
         
     }
     
-    
-    
+        
 /* endRunSwiped is used to end the run action - user will swipe or slide left to right to end or use pause button*/
     @objc func endRunSwiped(sender: UIPanGestureRecognizer){
         /* the constants below are used to adjust the slider relative to its background view
