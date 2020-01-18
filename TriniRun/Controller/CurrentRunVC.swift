@@ -47,10 +47,20 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
     func startRun(){
         manager?.startUpdatingLocation()
         startTimer()
+        pauseBtn.setImage(#imageLiteral(resourceName: "pauseButton"), for: .normal)
+
     }
         
     func endRun(){
         manager?.stopUpdatingLocation()
+    }
+    
+    func pauseRun(){
+        startLocation = nil
+        lastLocation = nil
+        timer.invalidate()
+        manager?.stopUpdatingLocation()
+        pauseBtn.setImage(#imageLiteral(resourceName: "resumeButton"), for: .normal)
     }
 
     func startTimer(){
@@ -74,7 +84,11 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
     
     
     @IBAction func pauseBtnPressed(_ sender: Any) {
-        
+        if timer.isValid{
+            pauseRun()
+        }else{
+            startRun()
+        }
         
     }
     
@@ -94,7 +108,7 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
                     
                 } else if sliderView.center.x >= swipeBGImageView.center.x + maxAdjust{
                     sliderView.center.x = swipeBGImageView.center.x + maxAdjust
-                    //End Run Code goes here
+                    endRun()                                  // Data is added to realm via this function
                     dismiss(animated: true, completion: nil)  //return to the main view as run has ended
                 } else{
                     sliderView.center.x = swipeBGImageView.center.x - minAdjust
