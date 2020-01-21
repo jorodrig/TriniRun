@@ -34,6 +34,7 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
         sliderImageView.addGestureRecognizer(swipeGesture) //Recognize slidegestures
         sliderImageView.isUserInteractionEnabled = true  //allow user interaction
         swipeGesture.delegate = self as? UIGestureRecognizerDelegate //must have
+        debugPrint("Realm data:")
         
     }
     
@@ -53,6 +54,8 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
         
     func endRun(){
         manager?.stopUpdatingLocation()
+        //Run.addRunToRealm(pace: pace, distance: runDistance, duration: counter  //This is all that is needed to create our Realm Object via the Run class
+        
     }
     
     func pauseRun(){

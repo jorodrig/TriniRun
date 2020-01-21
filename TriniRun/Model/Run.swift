@@ -11,15 +11,18 @@ import RealmSwift
 
 class Run: Object {         //inherits from Object
     
-    /* START CREATE REALM OBJECT*/
-    dynamic public private(set) var id = ""             //sets a realm dynamic variable caled ID.  Required - dynamic allows the Realm Backend to dynamically update any and all realm database vars as needed.  Must be dynamic.  The set is data encapsulation.  In this case we can GET data from any source but can only SET within our database file.  Same for all the other variables
+    /* START CREATE REALM OBJECT: Data Model to manage data for runs.
+       NOTE: With Realm - we MUST create a NEW instance EVERYTIME we WRITE and everytimg we READ
+       ALSO: Writes to Realm is asynchronous - so we need to take it off the main Thread - and instead use a serial dispatch  asynchronous queue
+       we need to be sure we are calling it from the same Thread */
+    @objc dynamic public private(set) var id: String = ""             /*sets a realm dynamic variable caled ID.  Required - dynamic allows the Realm Backend to dynamically update any and all realm database vars as needed.  Must be dynamic.  The set is data encapsulation.  In this case we can GET data from any source but can only SET within our database file.  Same for all the other variables*/
     
-    dynamic public private(set) var date = NSDate()     //allows for easy sorting by date.  NSDate does have timestamp if needed for display
-    dynamic public private(set) var pace = 0
-    dynamic public private(set) var distance = 0.0
-    dynamic public private(set) var duration = 0
+    @objc dynamic public private(set) var date = NSDate()     //allows for easy sorting by date.  NSDate does have timestamp if needed for display
+    @objc dynamic public private(set) var pace = 0
+    @objc dynamic public private(set) var distance = 0.0
+    @objc dynamic public private(set) var duration = 0
     
-    override class func primaryKey() -> String? {
+    override class func primaryKey() -> String {
         return "id"                                     //required: realm must know what the PK is. Any previously assigned VAR can be the PK
     }
     
@@ -35,6 +38,36 @@ class Run: Object {         //inherits from Object
         self.pace = pace
         self.distance = distance
         self.duration = duration
+    }
+    
+    /* Static func addRunToRealm -CALLED in endRun() in CurrentRunVC.swift - create static as we want a single instance that won't be overwritten */
+    static func addRunToRealm(pace: Int, distance: Double, duration: Int){
+        REALM_QUEUE.sync {                          //Created in Utilities->Constants - this allows us to run Realm on its own async Thread
+       
+        let run = Run(pace: pace, distance: distance, duration: duration) //passed in from previous VC
+        
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(run)
+                try realm.commitWrite()             //not mandatory but preferred to confirm the commit
+            }
+            } catch{
+            debugPrint("Error adding run to realm!")
+        }
+      }
+    }
+    
+    
+    static func getAllRuns() ->Results<Run>? {
+        do {
+            let realm = try Realm()
+            var runs = realm.objects(Run.self)
+            return runs
+        }catch{
+            return nil                            //Return Nil if there is no data in database
+        }
+        
     }
     
     /* END CREATE REALM OBJECT*/
