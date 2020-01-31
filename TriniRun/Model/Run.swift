@@ -15,12 +15,12 @@ class Run: Object {         //inherits from Object
        NOTE: With Realm - we MUST create a NEW instance EVERYTIME we WRITE and everytimg we READ
        ALSO: Writes to Realm is asynchronous - so we need to take it off the main Thread - and instead use a serial dispatch  asynchronous queue
        we need to be sure we are calling it from the same Thread */
-    dynamic public private(set) var id: String = ""             /*sets a realm dynamic variable caled ID.  Required - dynamic allows the Realm Backend to dynamically update any and all realm database vars as needed.  Must be dynamic.  The set is data encapsulation.  In this case we can GET data from any source but can only SET within our database file.  Same for all the other variables*/
-    
-    dynamic public private(set) var date = NSDate()     //allows for easy sorting by date.  NSDate does have timestamp if needed for display
-    dynamic public private(set) var pace = 0
-    dynamic public private(set) var distance = 0.0
-    dynamic public private(set) var duration = 0
+    @objc dynamic public private(set) var id: String = ""             /*sets a realm dynamic variable caled ID.  Required - dynamic allows the Realm Backend to dynamically update any and all realm database vars as needed.  Must be dynamic.  The set is data encapsulation.  In this case we can GET data from any source but can only SET within our database file.  Same for all the other variables*/
+    /*NOTE: Added @objc to Realm vars as without app crashed due to primary key not set on object run error */
+    @objc dynamic public private(set) var date = NSDate()     //allows for easy sorting by date.  NSDate does have timestamp if needed for display
+    @objc dynamic public private(set) var pace = 0
+    @objc dynamic public private(set) var distance = 0.0
+    @objc dynamic public private(set) var duration = 0
     
     override class func primaryKey() -> String {
         return "id"                                     //required: realm must know what the PK is. Any previously assigned VAR can be the PK
@@ -48,6 +48,9 @@ class Run: Object {         //inherits from Object
         
         do {
             let realm = try Realm()
+            print(Realm.Configuration.defaultConfiguration.fileURL!)
+
+
             try realm.write {
                 realm.add(run)
                 try realm.commitWrite()             //not mandatory but preferred to confirm the commit
@@ -60,11 +63,15 @@ class Run: Object {         //inherits from Object
     
     
     static func getAllRuns() ->Results<Run>? {
+        print("In Get All Runs in Run.swift model")
         do {
             let realm = try Realm()
             var runs = realm.objects(Run.self)
             return runs
         }catch{
+            print("No data found in realm db")
+            print(Realm.Configuration.defaultConfiguration.fileURL!)
+
             return nil                            //Return Nil if there is no data in database
         }
         

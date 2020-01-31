@@ -18,6 +18,7 @@ class BeginRunVC: LocationVC {  //inherit LocationVC which already inherits view
         super.viewDidLoad()
         checkLocationAuthStatus()
         mapView.delegate = self
+        
         //print("Here are my runs: \(String(describing: Run.getAllRuns()))")
         print("Here are my runs: \(Run.getAllRuns())")
 
