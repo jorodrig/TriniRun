@@ -34,7 +34,7 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
         sliderImageView.addGestureRecognizer(swipeGesture) //Recognize slidegestures
         sliderImageView.isUserInteractionEnabled = true  //allow user interaction
         swipeGesture.delegate = self as? UIGestureRecognizerDelegate //must have
-        debugPrint("Realm data:")
+        debugPrint("in ViewDidLoad CurrentRunVC Realm data:")
         
     }
     
