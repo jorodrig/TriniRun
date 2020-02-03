@@ -67,6 +67,8 @@ class Run: Object {         //inherits from Object
         do {
             let realm = try Realm()
             var runs = realm.objects(Run.self)
+            //let runs = realm.objects(Run.self)  //test
+
             return runs
         }catch{
             print("No data found in realm db")
