@@ -44,20 +44,20 @@ class Run: Object {         //inherits from Object
     static func addRunToRealm(pace: Int, distance: Double, duration: Int){
         REALM_QUEUE.sync {                          //Created in Utilities->Constants - this allows us to run Realm on its own async Thread
        
-        let run = Run(pace: pace, distance: distance, duration: duration) //passed in from previous VC
-        
-        do {
-            let realm = try Realm()
-            print(Realm.Configuration.defaultConfiguration.fileURL!)
+            let run = Run(pace: pace, distance: distance, duration: duration) //passed in from previous VC
+            
+            do {
+                let realm = try Realm()
+                print(Realm.Configuration.defaultConfiguration.fileURL!)
 
 
-            try realm.write {
-                realm.add(run)
-                try realm.commitWrite()             //not mandatory but preferred to confirm the commit
+                    try realm.write {
+                        realm.add(run)
+                    try realm.commitWrite()             //not mandatory but preferred to confirm the commit
+                    }
+                } catch{
+                    debugPrint("Error adding run to realm!")
             }
-            } catch{
-            debugPrint("Error adding run to realm!")
-        }
       }
     }
     
@@ -67,12 +67,12 @@ class Run: Object {         //inherits from Object
         do {
             let realm = try Realm()
             var runs = realm.objects(Run.self)
-            //let runs = realm.objects(Run.self)  //test
+            runs = runs.sorted(byKeyPath: "data", ascending: false)
+            print(Realm.Configuration.defaultConfiguration.fileURL!)  //The path of the Realm Database
 
             return runs
         }catch{
-            print("No data found in realm db")
-            print(Realm.Configuration.defaultConfiguration.fileURL!)
+            debugPrint("No data found in realm db")
 
             return nil                            //Return Nil if there is no data in database
         }

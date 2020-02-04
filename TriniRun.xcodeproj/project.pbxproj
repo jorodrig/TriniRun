@@ -11,6 +11,7 @@
 		7C033CD423D326DE0037388D /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C033CD323D326DE0037388D /* Run.swift */; };
 		7C09192123CDD84B0019938A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C09192023CDD84B0019938A /* Extensions.swift */; };
 		7C21247223C4AA20005766ED /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C21247123C4AA20005766ED /* LocationVC.swift */; };
+		7C2F864E23E852DD00EFCAA6 /* AppNotes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 7C2F864D23E852DD00EFCAA6 /* AppNotes.rtf */; };
 		7C555DEA23D4906C00FE6CFD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C555DE923D4906C00FE6CFD /* Constants.swift */; };
 		7C66F6E723B00D72005DEB8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66F6E623B00D72005DEB8E /* AppDelegate.swift */; };
 		7C66F6E923B00D72005DEB8E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C66F6E823B00D72005DEB8E /* SceneDelegate.swift */; };
@@ -31,6 +32,7 @@
 		7C033CD323D326DE0037388D /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		7C09192023CDD84B0019938A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		7C21247123C4AA20005766ED /* LocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
+		7C2F864D23E852DD00EFCAA6 /* AppNotes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = AppNotes.rtf; sourceTree = "<group>"; };
 		7C555DE923D4906C00FE6CFD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7C66F6E323B00D72005DEB8E /* TriniRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TriniRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C66F6E623B00D72005DEB8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				7C66F6F123B00D75005DEB8E /* Assets.xcassets */,
 				7C66F6F323B00D75005DEB8E /* LaunchScreen.storyboard */,
 				7C66F6F623B00D75005DEB8E /* Info.plist */,
+				7C2F864D23E852DD00EFCAA6 /* AppNotes.rtf */,
 			);
 			path = TriniRun;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				7C66F6F523B00D75005DEB8E /* LaunchScreen.storyboard in Resources */,
 				7CFEC0CE23B28EFF00B9161A /* Run Home.png in Resources */,
 				7C66F6F223B00D75005DEB8E /* Assets.xcassets in Resources */,
+				7C2F864E23E852DD00EFCAA6 /* AppNotes.rtf in Resources */,
 				7CFEC0CD23B28EFF00B9161A /* Log TableView VC.png in Resources */,
 				7C66F6F023B00D72005DEB8E /* Main.storyboard in Resources */,
 				7CFEC0CC23B28EFF00B9161A /* On Run VC.png in Resources */,
