@@ -67,7 +67,7 @@ class Run: Object {         //inherits from Object
         do {
             let realm = try Realm()
             var runs = realm.objects(Run.self)
-            runs = runs.sorted(byKeyPath: "data", ascending: false)
+            runs = runs.sorted(byKeyPath: "date", ascending: false)
             print(Realm.Configuration.defaultConfiguration.fileURL!)  //The path of the Realm Database
 
             return runs
