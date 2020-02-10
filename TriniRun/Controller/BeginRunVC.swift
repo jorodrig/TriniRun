@@ -13,6 +13,12 @@ import MapKit
 class BeginRunVC: LocationVC {  //inherit LocationVC which already inherits viewcontroller
 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var lastRunCloseBrn: UIButton!
+    @IBOutlet weak var paceLbl: UILabel!
+    @IBOutlet weak var distanceLbl: UILabel!
+    @IBOutlet weak var durationLbl: UILabel!
+    @IBOutlet weak var lastRunBGView: UIView!
+    @IBOutlet weak var lastRunStack: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +39,31 @@ class BeginRunVC: LocationVC {  //inherit LocationVC which already inherits view
 
     override func viewDidDisappear(_ animated: Bool) {
         manager?.stopUpdatingLocation()
+    }
+    
+    func getLastRun(){
+        guard let lastRun = Run.getAllRuns()?.first else {
+            lastRunStack.isHidden = true                        //if there are no runs just hide
+            lastRunBGView.isHidden = true
+            lastRunCloseBrn.isHidden = true
+            return
+        }
+        /* If there are runs show run features*/
+        lastRunStack.isHidden = false
+        lastRunBGView.isHidden = false
+        lastRunCloseBrn.isHidden = false
+        paceLbl.text = lastRun.pace.formatTimeDurationToString()
+        distanceLbl.text = "\(lastRun.distance.metersToMiles(places: 2)) mi "
+        durationLbl.text = "\(lastRun.duration.formatTimeDurationToString()) "
+              
+            }
+    
+    
+    @IBAction func lastCloseBtnPressed(_ sender: Any) {
+        
+        lastRunStack.isHidden = true
+        lastRunBGView.isHidden = true
+        lastRunCloseBrn.isHidden = true
     }
     
     @IBAction func locationCenterBtnPressed(_ sender: Any) {
