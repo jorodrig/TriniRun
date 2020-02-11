@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import RealmSwift  //We need this since we are using the Locations which is a Realm Type.
 
 class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from UIViewController
 
@@ -19,12 +20,15 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
     @IBOutlet weak var pauseBtn: UIButton!
     
     
-    var startLocation: CLLocation!              //must be forced unwrap as should not be nil once started
-    var lastLocation: CLLocation!               //ditto
-    var runDistance = 0.0                       //ditto
-    var counter = 0                             // used in Timer function - represents seconds
-    var timer = Timer()
-    var pace = 0                                //Used in pace function seconds/miles
+    /* fileprivate needed in swift-4 and beyond: fileprivate allows access to variables in extensions*/
+    fileprivate var startLocation: CLLocation!              //must be forced unwrap as should not be nil once started
+    fileprivate var lastLocation: CLLocation!               //ditto
+    fileprivate var runDistance = 0.0                       //ditto
+    fileprivate var counter = 0                             // used in Timer function - represents seconds
+    fileprivate var timer = Timer()
+    fileprivate var coordinatelocations = List<Location>()            //List of Realm objects as defined in the Run.swift model
+    fileprivate var pace = 0                                //Used in pace function seconds/miles
+    
     
     
     override func viewDidLoad() {
@@ -43,6 +47,8 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
         manager?.delegate = self
         manager?.distanceFilter = 10 //Meters
         startRun()
+        debugPrint("in viewWillAppear in CurrentRunVC ")
+
         }
     
     func startRun(){
@@ -54,7 +60,7 @@ class CurrentRunVC: LocationVC {  //inherits from LocationVC which inherits from
         
     func endRun(){
         manager?.stopUpdatingLocation()
-        Run.addRunToRealm(pace: pace, distance: runDistance, duration: counter) //This is all that is needed to create our Realm Object via the Run class
+        Run.addRunToRealm(pace: pace, distance: runDistance, duration: counter, locations: coordinatelocations) //This is all that is needed to create our Realm Object via the Run class
         
     }
     
@@ -138,7 +144,10 @@ extension CurrentRunVC: CLLocationManagerDelegate{
             startLocation = locations.first                                    //assign the first loaction when motion detected
         }else if let location = locations.last{                                //the last location detected in CLLocation
             runDistance += lastLocation.distance(from: location)               //is the last location in the CLLocaiton array
+            let newLocation = Location(latidude: Double(lastLocation.coordinate.latitude), longitude: Double(lastLocation.coordinate.longitude))
+            coordinatelocations.insert(newLocation, at: 0)
             distanceLbl.text = "\(runDistance.metersToMiles(places: 2))"       //update the Distance label
+            
             if counter > 0 && runDistance > 0 {
                 paceLbl.text = calculatePace(time: counter, miles: runDistance.metersToMiles(places: 2))
             }

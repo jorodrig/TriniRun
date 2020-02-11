@@ -35,6 +35,7 @@ class BeginRunVC: LocationVC {  //inherit LocationVC which already inherits view
     override func viewWillAppear(_ animated: Bool) {
         manager?.delegate = self
         manager?.startUpdatingLocation()
+        getLastRun()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -54,7 +55,7 @@ class BeginRunVC: LocationVC {  //inherit LocationVC which already inherits view
         lastRunCloseBrn.isHidden = false
         paceLbl.text = lastRun.pace.formatTimeDurationToString()
         distanceLbl.text = "\(lastRun.distance.metersToMiles(places: 2)) mi "
-        durationLbl.text = "\(lastRun.duration.formatTimeDurationToString()) "
+        durationLbl.text = lastRun.duration.formatTimeDurationToString()
               
             }
     

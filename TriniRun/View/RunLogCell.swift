@@ -23,7 +23,7 @@ class RunLogCell: UITableViewCell {
     /* Function to configure the table view Cell */
     func configure(run: Run) {
         runDurationLbl.text = run.duration.formatTimeDurationToString() //we created the formatTimedurationToString override methog
-        totalDIstanceLbl.text = "\run.distance.metersToMiles(places: 2)) mi"
+        totalDIstanceLbl.text = "\run.distance.metersToMiles(places: 2)) mi"  //we created the metersToMiles extension
         averagePaceLbl.text = run.pace.formatTimeDurationToString()
         dateLbl.text = run.date.getDateString()
         

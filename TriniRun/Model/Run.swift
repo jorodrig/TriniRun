@@ -21,6 +21,9 @@ class Run: Object {         //inherits from Object
     @objc dynamic public private(set) var pace = 0
     @objc dynamic public private(set) var distance = 0.0
     @objc dynamic public private(set) var duration = 0
+    /*NOTE: Type List and Realm properties cannot be declared as dynamic as these typs are generic properties*/
+    public private(set) var locations = List<Location>()      //Initially an empty of locations list to track path of the run
+    
     
     override class func primaryKey() -> String {
         return "id"                                     //required: realm must know what the PK is. Any previously assigned VAR can be the PK
@@ -31,20 +34,21 @@ class Run: Object {         //inherits from Object
     }
     
     /* Convenience method here is like a constructor: Required*/
-    convenience  init(pace: Int, distance: Double, duration: Int) {
+    convenience  init(pace: Int, distance: Double, duration: Int, locations: List<Location>) {
         self.init()
         self.id = UUID().uuidString.lowercased()        //generates unique object IDs in lowercase - lowercase not required but I prefer
         self.date = NSDate()
         self.pace = pace
         self.distance = distance
         self.duration = duration
+        self.locations = locations
     }
     
     /* Static func addRunToRealm -CALLED in endRun() in CurrentRunVC.swift - create static as we want a single instance that won't be overwritten */
-    static func addRunToRealm(pace: Int, distance: Double, duration: Int){
+    static func addRunToRealm(pace: Int, distance: Double, duration: Int, locations: List<Location>){
         REALM_QUEUE.sync {                          //Created in Utilities->Constants - this allows us to run Realm on its own async Thread
        
-            let run = Run(pace: pace, distance: distance, duration: duration) //passed in from previous VC
+            let run = Run(pace: pace, distance: distance, duration: duration, locations: locations) //passed in from previous VC
             
             do {
                 let realm = try Realm()

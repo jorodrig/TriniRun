@@ -22,6 +22,7 @@
 		7C66F6F523B00D75005DEB8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C66F6F323B00D75005DEB8E /* LaunchScreen.storyboard */; };
 		7C68407323C5DF7100E046B0 /* CurrentRunVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C68407223C5DF7100E046B0 /* CurrentRunVC.swift */; };
 		7C7106F223EECC8D005405E7 /* RunLogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7106F123EECC8D005405E7 /* RunLogCell.swift */; };
+		7C7FB9FC23F2D1ED0023CC84 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7FB9FB23F2D1ED0023CC84 /* Location.swift */; };
 		7CFEC0CC23B28EFF00B9161A /* On Run VC.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CFEC0C923B28EFE00B9161A /* On Run VC.png */; };
 		7CFEC0CD23B28EFF00B9161A /* Log TableView VC.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CFEC0CA23B28EFE00B9161A /* Log TableView VC.png */; };
 		7CFEC0CE23B28EFF00B9161A /* Run Home.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CFEC0CB23B28EFF00B9161A /* Run Home.png */; };
@@ -46,6 +47,7 @@
 		7C66F6F623B00D75005DEB8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C68407223C5DF7100E046B0 /* CurrentRunVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentRunVC.swift; sourceTree = "<group>"; };
 		7C7106F123EECC8D005405E7 /* RunLogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunLogCell.swift; sourceTree = "<group>"; };
+		7C7FB9FB23F2D1ED0023CC84 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		7CFEC0C923B28EFE00B9161A /* On Run VC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "On Run VC.png"; sourceTree = "<group>"; };
 		7CFEC0CA23B28EFE00B9161A /* Log TableView VC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Log TableView VC.png"; sourceTree = "<group>"; };
 		7CFEC0CB23B28EFF00B9161A /* Run Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Run Home.png"; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				7C033CD323D326DE0037388D /* Run.swift */,
+				7C7FB9FB23F2D1ED0023CC84 /* Location.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C66F6ED23B00D72005DEB8E /* RunLogVC.swift in Sources */,
+				7C7FB9FC23F2D1ED0023CC84 /* Location.swift in Sources */,
 				7C033CD423D326DE0037388D /* Run.swift in Sources */,
 				7C66F6EB23B00D72005DEB8E /* BeginRunVC.swift in Sources */,
 				7C66F6E723B00D72005DEB8E /* AppDelegate.swift in Sources */,
