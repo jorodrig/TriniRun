@@ -23,7 +23,6 @@ class BeginRunVC: LocationVC {  //inherit LocationVC which already inherits view
     override func viewDidLoad() {
         super.viewDidLoad()
         checkLocationAuthStatus()
-        mapView.delegate = self
         
         //print("Here are my runs: \(String(describing: Run.getAllRuns()))")
         print("Here are my runs: \(String(describing: Run.getAllRuns()))")
@@ -34,6 +33,7 @@ class BeginRunVC: LocationVC {  //inherit LocationVC which already inherits view
      between BeginRun and Current Run.*/
     override func viewWillAppear(_ animated: Bool) {
         manager?.delegate = self
+        mapView.delegate = self
         manager?.startUpdatingLocation()
         getLastRun()
     }
@@ -41,6 +41,9 @@ class BeginRunVC: LocationVC {  //inherit LocationVC which already inherits view
     override func viewDidDisappear(_ animated: Bool) {
         manager?.stopUpdatingLocation()
     }
+    
+    
+    
     
     func getLastRun(){
         guard let lastRun = Run.getAllRuns()?.first else {
@@ -80,6 +83,16 @@ extension BeginRunVC: CLLocationManagerDelegate{
             mapView.showsUserLocation = true
             mapView.userTrackingMode = .follow
         }
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let polyline = overlay as! MKPolyline
+        let renderer = MKPolylineRenderer(polyline: polyline)  //this is our polyline overlay on our map
+        /* Setup the polyline properties as rendered on the map view*/
+        renderer.strokeColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
+        renderer.lineWidth = 4
+        return renderer
     }
     
     
