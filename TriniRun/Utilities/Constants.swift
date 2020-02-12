@@ -11,5 +11,6 @@ import Foundation
 /*Global Variables*/
 
 let REALM_QUEUE = DispatchQueue(label: "realmQueue")   //Global serial dispatch queue - required by Realm -CALLED IN Run.swift->addRunToRealm()
+let REALM_RUN_CONFIG = "realmRunConfig"                //Global variable for the Realm config as used in RealmConfig.swift in Utilities Folder
 
   

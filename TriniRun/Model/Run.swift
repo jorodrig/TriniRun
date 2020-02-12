@@ -51,7 +51,7 @@ class Run: Object {         //inherits from Object
             let run = Run(pace: pace, distance: distance, duration: duration, locations: locations) //passed in from previous VC
             
             do {
-                let realm = try Realm()
+                let realm = try Realm(configuration: RealmConfig.runDataConfig)  //Updated Realm() to Realm( with our custom Realm Config as defined in Utilities RealmConfig.swift)
                 print(Realm.Configuration.defaultConfiguration.fileURL!)
 
 
@@ -69,7 +69,7 @@ class Run: Object {         //inherits from Object
     static func getAllRuns() ->Results<Run>? {
         print("In Get All Runs in Run.swift model")
         do {
-            let realm = try Realm()
+            let realm = try Realm(configuration: RealmConfig.runDataConfig)  //Updated Realm() to Realm( with our custom Realm Config as defined in Utilities RealmConfig.swift)
             var runs = realm.objects(Run.self)
             runs = runs.sorted(byKeyPath: "date", ascending: false)
             print(Realm.Configuration.defaultConfiguration.fileURL!)  //The path of the Realm Database
