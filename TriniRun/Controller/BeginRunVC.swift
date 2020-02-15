@@ -35,33 +35,53 @@ class BeginRunVC: LocationVC {  //inherit LocationVC which already inherits view
         manager?.delegate = self
         mapView.delegate = self
         manager?.startUpdatingLocation()
-        getLastRun()
+        //getLastRun()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        setUpMapView()
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         manager?.stopUpdatingLocation()
     }
     
-    
-    
-    
-    func getLastRun(){
-        guard let lastRun = Run.getAllRuns()?.first else {
+    /* setUpMapView with check to see if polyline overlays already exist, if not , it will add the new overlay polyline, If exists an overlay polyline. Remove before adding the new polyline overlay*/
+    func setUpMapView(){
+        if  let overlay = addLastRunToMap(){                // get the last run that will be used to overlay the polyline.
+            if mapView.overlays.count > 0 {                 // >0 means there are overlays on the map
+                mapView.removeOverlays(mapView.overlays)    // remove existing overlay
+            }
+            mapView.addOverlay(overlay)                     //impliws else: add the current i.e. last run overlay polyline
+            lastRunStack.isHidden = false
+            lastRunBGView.isHidden = false
+            lastRunCloseBrn.isHidden = false
+        } else {
             lastRunStack.isHidden = true                        //if there are no runs just hide
             lastRunBGView.isHidden = true
             lastRunCloseBrn.isHidden = true
-            return
         }
-        /* If there are runs show run features*/
-        lastRunStack.isHidden = false
-        lastRunBGView.isHidden = false
-        lastRunCloseBrn.isHidden = false
+        
+    }
+    
+    /* Optional MKPloyline since we will not have a polyline when the app first runs*/
+    func addLastRunToMap() -> MKPolyline? {
+        guard let lastRun = Run.getAllRuns()?.first  else {return nil}
         paceLbl.text = lastRun.pace.formatTimeDurationToString()
         distanceLbl.text = "\(lastRun.distance.metersToMiles(places: 2)) mi "
         durationLbl.text = lastRun.duration.formatTimeDurationToString()
-              
-            }
+        
+        //Next add the coordinates from our last run
+        var coordinate = [CLLocationCoordinate2D]()     //empty array for last run coordinated defined below
+        for location in lastRun.locations{
+            coordinate.append(CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+        }
+        
+         
+        return MKPolyline(coordinates: coordinate, count: lastRun.locations.count)
+    }
     
+      
     
     @IBAction func lastCloseBtnPressed(_ sender: Any) {
         
