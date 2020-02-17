@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-
+import RealmSwift
 
 class BeginRunVC: LocationVC {  //inherit LocationVC which already inherits viewcontroller
 
@@ -35,7 +35,6 @@ class BeginRunVC: LocationVC {  //inherit LocationVC which already inherits view
         manager?.delegate = self
         mapView.delegate = self
         manager?.startUpdatingLocation()
-        //getLastRun()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -57,9 +56,10 @@ class BeginRunVC: LocationVC {  //inherit LocationVC which already inherits view
             lastRunBGView.isHidden = false
             lastRunCloseBrn.isHidden = false
         } else {
-            lastRunStack.isHidden = true                        //if there are no runs just hide
+            lastRunStack.isHidden = true                        
             lastRunBGView.isHidden = true
             lastRunCloseBrn.isHidden = true
+            centerMapOnUserLocation()
         }
         
     }
@@ -77,20 +77,55 @@ class BeginRunVC: LocationVC {  //inherit LocationVC which already inherits view
             coordinate.append(CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
         }
         
+        mapView.userTrackingMode = .none //stop tracking user location
+        mapView.setRegion(centerMapOnPrevRoute(locations: lastRun.locations), animated: true)  //centers the map on the prev run i.e. the last run completed
          
         return MKPolyline(coordinates: coordinate, count: lastRun.locations.count)
     }
     
-      
+    
+    
+    /* centerMapOnUserLocation tracks the user by following and created a default coordinate region */
+    func centerMapOnUserLocation () {
+        mapView.userTrackingMode = .follow
+        let coordinateRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, latitudinalMeters: 500,longitudinalMeters: 500)
+        mapView.setRegion(coordinateRegion, animated: true)
+        
+    }
+    
+    
+    /* centerMapOnPrevRoute compares the user's current location to the user's previous run's location i.e. latitude and longitude and if current location coordinates is smaller than the previous run
+     this function will reset*/
+    func centerMapOnPrevRoute(locations: List<Location>) -> MKCoordinateRegion{
+        guard let initialLoc = locations.first else { return MKCoordinateRegion()}   //first is the previous run
+        var minLat = initialLoc.latitude
+        var minLng = initialLoc.longitude
+        var maxLat = minLat
+        var maxLng = minLng
+        
+        for location in locations {
+            minLat = min(minLat, location.latitude)   // compare our current location.latitude to the minLat then set minLat to the smaller
+            minLng = min(minLng, location.longitude)  //ditto for longitude
+            maxLat = max(maxLat, location.latitude)   //ditto for max latitude
+            maxLng = max(maxLng, location.longitude)  //ditto for max longitude
+        }
+        
+        return MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: (minLat + maxLat)/2, longitude: (minLng + maxLng)/2), span: MKCoordinateSpan(latitudeDelta: (maxLat - minLat)*1.4, longitudeDelta: (maxLng - minLng)*1.4))
+    }
+    
     
     @IBAction func lastCloseBtnPressed(_ sender: Any) {
         
         lastRunStack.isHidden = true
         lastRunBGView.isHidden = true
         lastRunCloseBrn.isHidden = true
+        centerMapOnUserLocation()
     }
     
     @IBAction func locationCenterBtnPressed(_ sender: Any) {
+        
+        centerMapOnUserLocation()
+        
         
     }
     
@@ -101,7 +136,7 @@ extension BeginRunVC: CLLocationManagerDelegate{
         if status == .authorizedWhenInUse{
             checkLocationAuthStatus()
             mapView.showsUserLocation = true
-            mapView.userTrackingMode = .follow
+            //mapView.userTrackingMode = .follow
         }
     }
     
