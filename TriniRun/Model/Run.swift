@@ -65,7 +65,7 @@ class Run: Object {         //inherits from Object
       }
     }
     
-    
+    /* Get all runs from Realm DB*/
     static func getAllRuns() ->Results<Run>? {
         print("In Get All Runs in Run.swift model")
         do {
@@ -79,6 +79,19 @@ class Run: Object {         //inherits from Object
             debugPrint("No data found in realm db")
 
             return nil                            //Return Nil if there is no data in database
+        }
+        
+    }
+    
+    
+    /* Get a single run by primary key id as ued in BeginRunVC.swift*/
+    static func getRun(byId id: String) -> Run? {
+        do {
+            let realm = try Realm(configuration: RealmConfig.runDataConfig)
+            return realm.object(ofType: Run.self, forPrimaryKey: id)
+                        
+        } catch {
+            return nil
         }
         
     }

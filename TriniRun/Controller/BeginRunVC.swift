@@ -65,7 +65,7 @@ class BeginRunVC: LocationVC {  //inherit LocationVC which already inherits view
     }
     
     /* Optional MKPloyline since we will not have a polyline when the app first runs*/
-    func addLastRunToMap() -> MKPolyline? {
+    /*func addLastRunToMap() -> MKPolyline? {
         guard let lastRun = Run.getAllRuns()?.first  else {return nil}
         paceLbl.text = lastRun.pace.formatTimeDurationToString()
         distanceLbl.text = "\(lastRun.distance.metersToMiles(places: 2)) mi "
@@ -82,13 +82,42 @@ class BeginRunVC: LocationVC {  //inherit LocationVC which already inherits view
          
         return MKPolyline(coordinates: coordinate, count: lastRun.locations.count)
     }
+    */
     
     
+    /* BEGIN TEST TO GET A SINGLE RUN BY ID from All Runs
+     NOTE: the Run.swift could be modified to return a single run instead of all runs*/
+    
+    /*  MKPloyline is an Optional since we will not have a polyline when the app first runs*/
+    func addLastRunToMap() -> MKPolyline? {
+        guard let lastRun = Run.getAllRuns()?.first  else {return nil}
+        paceLbl.text = lastRun.pace.formatTimeDurationToString()
+        distanceLbl.text = "\(lastRun.distance.metersToMiles(places: 2)) mi "
+        durationLbl.text = lastRun.duration.formatTimeDurationToString()
+        
+        //Next add the coordinates from our last run
+        var coordinate = [CLLocationCoordinate2D]()     //empty array for last run coordinated defined below
+        for location in lastRun.locations{
+            coordinate.append(CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+        }
+        
+        mapView.userTrackingMode = .none //stop tracking user location
+        
+        guard let locations = Run.getRun(byId: lastRun.id)?.locations else {return MKPolyline()}
+        
+        mapView.setRegion(centerMapOnPrevRoute(locations: locations), animated: true)  //centers the map on the prev run i.e. the last run completed
+         
+        return MKPolyline(coordinates: coordinate, count: locations.count)
+    }
+
+    
+    /* END TEST TO GET A SINGLE RUN BY ID instead of All Runs*/
+
     
     /* centerMapOnUserLocation tracks the user by following and created a default coordinate region */
     func centerMapOnUserLocation () {
         mapView.userTrackingMode = .follow
-        let coordinateRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, latitudinalMeters: 500,longitudinalMeters: 500)
+        let coordinateRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, latitudinalMeters: 1000,longitudinalMeters: 1000)
         mapView.setRegion(coordinateRegion, animated: true)
         
     }
